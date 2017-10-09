@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BabyStore.DAL;
 using BabyStore.Models;
+using BabyStore.ViewModels;
 
 namespace BabyStore.Controllers
 {
@@ -18,6 +19,9 @@ namespace BabyStore.Controllers
         // GET: Products
         public ActionResult Index(string category, string search)
         {
+            //Instantiate the ViewModel
+            ProductIndexViewModel viewModel = new ProductIndexViewModel();
+
             var products = db.Products.Include(p => p.Category);
 
             if (!String.IsNullOrEmpty(category))
@@ -30,13 +34,30 @@ namespace BabyStore.Controllers
                 products = products.Where(p => p.Name.Contains(search) || 
                 p.Description.Contains(search) || 
                 p.Category.Name.Contains(search));
-                ViewBag.Search = search;
+                viewModel.Search = search;
             }
 
-            var categories = products.OrderBy(p => p.Category.Name).Select(p => p.Category.Name).Distinct();
-            ViewBag.Category = new SelectList(categories);
+            //var categories = products.OrderBy(p => p.Category.Name).Select(p => p.Category.Name).Distinct();
 
-            return View(products.ToList());
+            viewModel.CatsWithCount = products.Where(p => p.CategoryID != null)
+                                              .GroupBy(p => p.Category.Name,
+                                                       p => p,
+                                                       (key, catGroup) => new CategoryWithCount()
+                                                       {
+                                                           CategoryName = key,
+                                                           ProductCount = catGroup.Count()
+                                                       });                                                                       
+
+
+            if (!String.IsNullOrEmpty(category))
+            {
+                products = products.Where(p => p.Category.Name == category);
+            }
+
+            //ViewBag.Category = new SelectList(categories);
+            viewModel.Products = products;
+
+            return View(viewModel);
         }
 
         // GET: Products/Details/5

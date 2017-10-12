@@ -1,10 +1,14 @@
 ﻿@model BabyStore.ViewModels.ProductIndexViewModel
+@using PagedList.Mvc
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Products";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
+<p>
+    @(String.IsNullOrWhiteSpace(Model.Search) ? "Showing all" : "Your search for " + Model.Search + " found") @Model.Products.TotalItemCount products
+</p>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,6 +16,8 @@
     {
         <label>Filter by category:</label> 
         @Html.DropDownListFor(vm => vm.Category, Model.CatFilterItems, "All")
+        <label>Sort by:</label>
+        @Html.DropDownListFor(vm => vm.SortBy, new SelectList(Model.Sorts, "Value", "Key"), "Default")
         <input type="submit" value="Filter"/>
         <input type="hidden" name="Search" id="Search" value="@Model.Search" />
     }
@@ -48,11 +54,22 @@
             @Html.DisplayFor(modelItem => item.Price)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
         </td>
     </tr>
 }
 
 </table>
+<div>
+    Page @(Model.Products.PageCount < Model.Products.PageNumber ? 0 : Model.Products.PageNumber) of @Model.Products.PageCount
+    @Html.PagedListPager(Model.Products, page =>
+        Url.Action("Index",
+                   new {
+                       category = @Model.Category,
+                       Search = @Model.Search,
+                       sortBy = @Model.SortBy,
+                       page
+                   }))
+</div>

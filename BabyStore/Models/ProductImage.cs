@@ -14,5 +14,7 @@ namespace BabyStore.Models
         [StringLength(100)]
         [Index(IsUnique = true)]
         public string FileName { get; set; }
+
+        public virtual ICollection<ProductImageMapping> ProductImageMappings { get; set; }
     }
 }

@@ -206,6 +206,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProductImagesController.cs" />
@@ -234,6 +235,10 @@
     <Compile Include="Migrations\201710131825556_UniqueFileName.Designer.cs">
       <DependentUpon>201710131825556_UniqueFileName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201710132028210_CreateProductImageMappings.cs" />
+    <Compile Include="Migrations\201710132028210_CreateProductImageMappings.Designer.cs">
+      <DependentUpon>201710132028210_CreateProductImageMappings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -241,15 +246,105 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Product.cs" />
     <Compile Include="Models\ProductImage.cs" />
+    <Compile Include="Models\ProductImageMapping.cs" />
     <Compile Include="Models\ProductMetaData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\ProductIndexViewModel.cs" />
+    <Compile Include="ViewModels\ProductViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\ProductImages\Bed1.JPG" />
+    <Content Include="Content\ProductImages\Bed2.JPG" />
+    <Content Include="Content\ProductImages\Bibs1.JPG" />
+    <Content Include="Content\ProductImages\Bibs2.JPG" />
+    <Content Include="Content\ProductImages\Bitmap01.bmp" />
+    <Content Include="Content\ProductImages\Bottles1.JPG" />
+    <Content Include="Content\ProductImages\Bottles2.JPG" />
+    <Content Include="Content\ProductImages\Bottles3.JPG" />
+    <Content Include="Content\ProductImages\CarSeat1.JPG" />
+    <Content Include="Content\ProductImages\CarSeat2.JPG" />
+    <Content Include="Content\ProductImages\CircusBale1.JPG" />
+    <Content Include="Content\ProductImages\CircusBale2.JPG" />
+    <Content Include="Content\ProductImages\CircusBale3.JPG" />
+    <Content Include="Content\ProductImages\ColicMedicine1.JPG" />
+    <Content Include="Content\ProductImages\Crib1.JPG" />
+    <Content Include="Content\ProductImages\Crib2.JPG" />
+    <Content Include="Content\ProductImages\Image01.jpg" />
+    <Content Include="Content\ProductImages\Image02.jpg" />
+    <Content Include="Content\ProductImages\Image03.jpg" />
+    <Content Include="Content\ProductImages\Image04.jpg" />
+    <Content Include="Content\ProductImages\Image05.jpg" />
+    <Content Include="Content\ProductImages\Image06.jpg" />
+    <Content Include="Content\ProductImages\Image07.jpg" />
+    <Content Include="Content\ProductImages\Image08.jpg" />
+    <Content Include="Content\ProductImages\Image09.jpg" />
+    <Content Include="Content\ProductImages\Image10.jpg" />
+    <Content Include="Content\ProductImages\Image11.jpg" />
+    <Content Include="Content\ProductImages\LargeImage.JPG" />
+    <Content Include="Content\ProductImages\Lion1.JPG" />
+    <Content Include="Content\ProductImages\LovedBale1.JPG" />
+    <Content Include="Content\ProductImages\Milk1.JPG" />
+    <Content Include="Content\ProductImages\Moses1.JPG" />
+    <Content Include="Content\ProductImages\Moses2.JPG" />
+    <Content Include="Content\ProductImages\Nappies1.JPG" />
+    <Content Include="Content\ProductImages\Nappies2.JPG" />
+    <Content Include="Content\ProductImages\Nappies3.JPG" />
+    <Content Include="Content\ProductImages\Pram1.JPG" />
+    <Content Include="Content\ProductImages\Pram2.JPG" />
+    <Content Include="Content\ProductImages\Pram3.JPG" />
+    <Content Include="Content\ProductImages\Rabbit1.JPG" />
+    <Content Include="Content\ProductImages\Reflux1.JPG" />
+    <Content Include="Content\ProductImages\SleepSuit1.JPG" />
+    <Content Include="Content\ProductImages\SleepSuit2.JPG" />
+    <Content Include="Content\ProductImages\Thumbnails\Bed1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Bed2.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Bibs1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Bibs2.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Bottles1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Bottles2.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Bottles3.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\CarSeat1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\CarSeat2.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\CircusBale1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\CircusBale2.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\CircusBale3.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\ColicMedicine1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Crib1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Crib2.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image01.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image02.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image03.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image04.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image05.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image06.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image07.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image08.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image09.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image10.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Image11.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Lion1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\LovedBale1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Milk1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Moses1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Moses2.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Nappies1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Nappies2.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Nappies3.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Pram1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Pram2.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Pram3.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Rabbit1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Reflux1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\SleepSuit1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\SleepSuit2.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Vest1.jpg" />
+    <Content Include="Content\ProductImages\Thumbnails\Vest2.jpg" />
+    <Content Include="Content\ProductImages\Vest1.JPG" />
+    <Content Include="Content\ProductImages\Vest2.JPG" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -322,10 +417,11 @@
     <Content Include="Views\ProductImages\Details.cshtml" />
     <Content Include="Views\ProductImages\Edit.cshtml" />
     <Content Include="Views\ProductImages\Index.cshtml" />
+    <Content Include="Views\Error\FileUploadLimitExceeded.cshtml" />
+    <Content Include="Views\Shared\_ProductEditCreatePartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\ProductImages\Thumbnails\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -350,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201710131825556_UniqueFileName.resx">
       <DependentUpon>201710131825556_UniqueFileName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710132028210_CreateProductImageMappings.resx">
+      <DependentUpon>201710132028210_CreateProductImageMappings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -1,7 +1,7 @@
 ﻿@model BabyStore.Models.ProductImage
 
 @{
-    ViewBag.Title = "Upload a Produce Image";
+    ViewBag.Title = "Upload Produce Images";
 }
 
 <h2>@ViewBag.Title</h2>
@@ -18,7 +18,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FileName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <input type="file" name="file" id="file" class="form-control"/>
+                <input type="file" name="files" id="files" multiple="multiple" class="form-control"/>
                 @Html.ValidationMessageFor(model => model.FileName, "", new { @class = "text-danger" })
             </div>
         </div>

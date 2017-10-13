@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<BabyStore.Models.ProductImage>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Images";
 }
 
-<h2>Index</h2>
+<h2>@ViewBag.Title</h2>
 
 <p>
-    @Html.ActionLink("Upload New Image", "Upload")
+    @Html.ActionLink("Upload New Images", "Upload")
 </p>
 <table class="table">
     <tr>
@@ -15,19 +15,25 @@
             @Html.DisplayNameFor(model => model.FileName)
         </th>
         <th></th>
+        <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FileName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FileName)
+            </td>
+            <td>
+                @if (!String.IsNullOrWhiteSpace(item.FileName))
+                {
+                    <img src="@(Url.Content(Constants.ProductImagePath) + item.FileName)">
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 
 </table>

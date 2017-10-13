@@ -12,7 +12,7 @@
 
 <p>
     @Html.ActionLink("Create New", "Create")
-    @using (Html.BeginForm("Index", "Products", FormMethod.Get))
+    @using (Html.BeginRouteForm("ProductsIndex", FormMethod.Get))
     {
         <label>Filter by category:</label> 
         @Html.DropDownListFor(vm => vm.Category, Model.CatFilterItems, "All")

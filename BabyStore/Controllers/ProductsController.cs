@@ -25,10 +25,7 @@ namespace BabyStore.Controllers
 
             var products = db.Products.Include(p => p.Category);
 
-            if (!String.IsNullOrEmpty(category))
-            {
-                products = products.Where(p => p.Category.Name == category);
-            }
+            
 
             if (!String.IsNullOrEmpty(search))
             {
@@ -38,7 +35,7 @@ namespace BabyStore.Controllers
                 viewModel.Search = search;
             }
 
-            //var categories = products.OrderBy(p => p.Category.Name).Select(p => p.Category.Name).Distinct();
+            var categories = products.OrderBy(p => p.Category.Name).Select(p => p.Category.Name).Distinct();
 
             viewModel.CatsWithCount = products.Where(p => p.CategoryID != null)
                                               .GroupBy(p => p.Category.Name,

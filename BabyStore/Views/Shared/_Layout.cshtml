@@ -23,9 +23,9 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>   
                     <li>@Html.ActionLink("Shop by Category", "Index", "Categories")</li>
-                    <li>@Html.ActionLink("View all our Products", "Index", "Products")</li>
+                    <li>@Html.RouteLink("View all our Products", "ProductsIndex")</li>
                 </ul>
-                @using (Html.BeginForm("Index", "Products", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                @using (Html.BeginRouteForm("ProductsIndex", FormMethod.Get, new { @class = "navbar-form navbar-left" }))
                 {
                     <div class="form-group">
                         @Html.TextBox("Search", null, new { @class = "form-control", @placeholder = "Search Products"})
